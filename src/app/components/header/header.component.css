@@ -1,0 +1,20 @@
+.container {
+    background-color: inherit;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #009aff;
+    color: #fff;
+}
+
+button {
+    background-color: #0180f9;
+    border: none;
+    color: white;
+    height: 40px;
+    width: 100px;
+    margin: auto 0;
+    border-radius: 5px;
+}

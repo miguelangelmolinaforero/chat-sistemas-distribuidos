@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+}
+
 .container {
     background-color: inherit;
 }
@@ -17,4 +24,5 @@ button {
     width: 100px;
     margin: auto 0;
     border-radius: 5px;
+    font-size: 12px;
 }

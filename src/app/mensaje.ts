@@ -1,4 +1,4 @@
 export interface Mensaje {
-    fecha_mensaje: Date,
+    fecha_mensaje: string,
     mensaje: string
 }

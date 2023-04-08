@@ -8,6 +8,38 @@ import { Mensaje } from "src/app/mensaje";
 })
 export class ChatComponent {
 
+  fecha_actual: Date = new Date;
+
+  hora: number = this.fecha_actual.getHours();
+  minutos: string = ('0' + this.fecha_actual.getMinutes().toString().slice(-2)).slice(-2);
+
+  hora_actual: string = this.hora + ':' + this.minutos;
+  contenido_mensaje: string = '';
+
+  array_mensajes: Mensaje [] = [
+    {
+      fecha_mensaje: this.hora_actual,
+      mensaje: 'mensaje de prueba'
+    },
+    {
+      fecha_mensaje: this.hora_actual,
+      mensaje: 'mensaje de prueba'
+    },
+    {
+      fecha_mensaje: this.hora_actual,
+      mensaje: 'mensaje de prueba'
+    },
+    {
+      fecha_mensaje: this.hora_actual,
+      mensaje: 'mensaje de prueba'
+    }
+  ];
+
+  nuevo_mensaje: Mensaje = {
+    fecha_mensaje: this.hora_actual,
+    mensaje: this.contenido_mensaje
+  }
+
   
 
 }

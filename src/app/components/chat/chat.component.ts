@@ -35,11 +35,14 @@ export class ChatComponent {
     }
   ];
 
-  nuevo_mensaje: Mensaje = {
-    fecha_mensaje: this.hora_actual,
-    mensaje: this.contenido_mensaje
+  enviarMensaje(){
+    if (this.contenido_mensaje != '') {   
+      const nuevoMensaje: Mensaje = {
+        fecha_mensaje: this.hora_actual,
+        mensaje: this.contenido_mensaje
+      };
+      this.array_mensajes.push(nuevoMensaje);
+      this.contenido_mensaje = '';
+    }
   }
-
-  
-
 }

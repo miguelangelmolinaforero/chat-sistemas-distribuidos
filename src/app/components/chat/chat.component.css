@@ -1,8 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 .chat-container {
     max-width: 700px;
     margin: 0 auto;
-    height: 85vh;
+    position: relative;
+    max-height: 570px;
 }
 
 .message-panel {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 10px;
+    width: 68%;
+}
+
+.messages-container {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.message-content {
+    display: flex;
+    gap: 10px;
+}
+
+.data-message {
+    background-color: #c2e1ff;
+    border-radius: 8px;
+    padding: 5px 12px;
+    margin: 5px;
+}
+
+img {
+    margin: auto 0;
+}
+
+p {
+    margin: 0;
+}
+
+.message {
+    font-size: 12px;
+}
+
+.message-date {
+    font-size: 9px;
+}
+
+input {
+    width: 70%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #0180f9;
+    outline: none;
+    font-size: 12px;
+}
+
+button {
+    width: 20%;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid;
+    background-color: #0180f9;
+    color: white;
+}
+
+button:hover {
+    background-color: #0054a3;
+    transition: all ease-in-out .3s;
+    color: white;
+}
+
+input::placeholder {
+    padding-left: 10px;
+}
+
+@media (max-width: 760px) {
+    .message-panel {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .message-content {
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .message-panel {
+        width: 50%;
+    }
 }

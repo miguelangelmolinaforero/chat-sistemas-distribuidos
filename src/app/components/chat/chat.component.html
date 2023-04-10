@@ -1,12 +1,15 @@
 <div class="chat-container">
     <div class="messages-container">
         <div class="message-content" *ngFor="let item of array_mensajes">
-            <p class="message">{{item.mensaje}}</p>
-            <p class="message-date">{{item.fecha_mensaje}}</p>
+            <img src="https://cdn.onlinewebfonts.com/svg/img_184513.png" alt="user icon" height="30" width="30">
+            <div class="data-message">
+                <p class="message">{{item.mensaje}}</p>
+                <p class="message-date">{{item.fecha_mensaje}}</p>
+            </div>
         </div>
     </div>
     <div class="message-panel">
-        <input type="text" placeholder="Escribe un mensaje" name="" id="">
-        <button onclick="">Enviar</button>
+        <input type="text" placeholder="Escribe un mensaje" name="" id="" [(ngModel)]="contenido_mensaje" (keyup.enter)="enviarMensaje()">
+        <button (click)="enviarMensaje()">Enviar</button>
     </div>
 </div>

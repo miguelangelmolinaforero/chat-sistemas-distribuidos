@@ -26,3 +26,27 @@ button {
     border-radius: 5px;
     font-size: 12px;
 }
+
+button:hover {
+    background-color: #0054a3;
+    transition: all ease-in-out .3s;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    header {
+        display: block;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 14px;
+        margin: 0;
+        padding: 20px 0 20px 0;
+    }
+    button {
+        margin-bottom: 20px;
+        width: 85px;
+        font-size: 10px;
+    }
+}

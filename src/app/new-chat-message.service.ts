@@ -2,29 +2,41 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Mensaje } from './mensaje';
 import { environment } from 'src/environments/environment';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, collectionGroup } from '@angular/fire/firestore';
+import { Observable, forkJoin, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewChatMessageService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private firestore: Firestore) { }
 
-   guardarUsuario(newMessage: Mensaje) {
-    this.httpClient.post(environment.urlFireDatabase + 'array_mensajes.json', newMessage)
-      .subscribe(
-        (response) => console.log('Se han guardado los datos' + response),
-        (error) =>
-          console.log('Se ha presentado error en el envio de datos' + error)
-      );
-    }
-    
-    obtenerMensajes() {
-      this.httpClient.get(environment.urlFireDatabase + 'array_mensajes.json')
-        .subscribe(
-          (response) => console.log('Se han guardado los datos' + response),
-          (error) =>
-            console.log('Se ha presentado error en el envio de datos' + error)
-        );
+  addMessage(mensaje: Mensaje){
+    const nodoMensaje = collection(this.firestore, 'Mensaje');
+    return addDoc(nodoMensaje, mensaje);
   }
+  
+  getMessages(): Observable<Mensaje[]> {
+    const nodoMensaje = collection(this.firestore, 'Mensaje');
+    return collectionData(nodoMensaje, {idField: 'id'}) as Observable<Mensaje[]>;
+  }
+
+  // deleteMessages() {
+  //   const nodoMensaje = doc(this.firestore, 'Mensaje');
+  //   return deleteDoc(nodoMensaje);
+  // }
+
+  deleteMessages() {
+    const collectionRef = collection(this.firestore, 'Mensajes');
+    return collectionData(collectionRef).pipe(
+      switchMap((messages) => {
+        const deletePromises = messages.map((message) => {
+          return deleteDoc(doc(this.firestore, 'Mensajes', message['contenido_mensaje']));
+        });
+        return forkJoin(deletePromises);
+      })
+    );
+  }
+
 }

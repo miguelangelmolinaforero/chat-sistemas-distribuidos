@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NewChatMessageService } from 'src/app/new-chat-message.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(
+    private chatService: NewChatMessageService
+  ){}
+
+  async eliminarMensajes(){
+    await this.chatService.deleteMessages();
+  }
 }

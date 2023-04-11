@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Mensaje } from "src/app/mensaje";
+import { NewChatMessageService } from 'src/app/new-chat-message.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,39 +11,33 @@ export class ChatComponent {
 
   fecha_actual: Date = new Date;
 
-  hora: number = this.fecha_actual.getHours();
-  minutos: string = ('0' + this.fecha_actual.getMinutes().toString().slice(-2)).slice(-2);
-
-  hora_actual: string = this.hora + ':' + this.minutos;
   contenido_mensaje: string = '';
 
-  array_mensajes: Mensaje [] = [
-    {
-      fecha_mensaje: this.hora_actual,
-      mensaje: 'mensaje de prueba'
-    },
-    {
-      fecha_mensaje: this.hora_actual,
-      mensaje: 'mensaje de prueba'
-    },
-    {
-      fecha_mensaje: this.hora_actual,
-      mensaje: 'mensaje de prueba'
-    },
-    {
-      fecha_mensaje: this.hora_actual,
-      mensaje: 'mensaje de prueba'
-    }
-  ];
+  array_mensajes: Mensaje [] = [];
 
-  enviarMensaje(){
+  constructor(
+    private chatService: NewChatMessageService
+  ){}
+
+  ngOnInit(): void {
+    this.chatService.getMessages().subscribe(messages => {
+      this.array_mensajes = messages;
+    });
+  }
+
+  async enviarMensaje(){
     if (this.contenido_mensaje != '') {   
+      let hora: number = this.fecha_actual.getHours();
+      let minutos: string = ('0' + this.fecha_actual.getMinutes().toString().slice(-2)).slice(-2);
+
+      let hora_actual: string = hora + ':' + minutos;
       const nuevoMensaje: Mensaje = {
-        fecha_mensaje: this.hora_actual,
+        fecha_mensaje: hora_actual,
         mensaje: this.contenido_mensaje
       };
-      this.array_mensajes.push(nuevoMensaje);
       this.contenido_mensaje = '';
+
+       await this.chatService.addMessage(nuevoMensaje);
     }
   }
 }

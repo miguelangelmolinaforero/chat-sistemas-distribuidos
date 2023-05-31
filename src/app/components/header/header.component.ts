@@ -11,8 +11,4 @@ export class HeaderComponent {
   constructor(
     private chatService: NewChatMessageService
   ){}
-
-  async eliminarMensajes(){
-    await this.chatService.deleteMessages();
-  }
 }
